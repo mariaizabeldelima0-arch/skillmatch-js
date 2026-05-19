@@ -1,0 +1,6 @@
+const candidato = {
+  nome: "Alan",
+  area: "Front-End",
+  habilidades: ["Swift", "Python", "JavaScript", "GitHub", "Lógica de Programação", "Scrum", "Kanban"],
+  experienciaMeses: 12
+};
