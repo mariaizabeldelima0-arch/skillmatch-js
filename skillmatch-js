@@ -89,3 +89,23 @@ function classifcarCompatibilidade(percentual) {
     return "Baixa Compatibilidade";
   }
 }
+
+function listarHabilidadesFaltantes(candidatoHabilidades, vagaRequisitos) {
+  const faltantes = vagasrequisitos.filter(r =>
+    !candidatoHabilidades.includes(r)
+  );
+  return faltantes;
+}
+
+function encontrarMelhorVaga(candidato, vagas) {
+
+  const analises = vagas.map(vaga => 
+    calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
+  );
+
+  const melhorAnalise = analises.reduce((melhor, atual) =>
+    atual.percentual > melhor.percentual ? atual : melhor
+  );
+
+  return melhorAnalise;
+}
