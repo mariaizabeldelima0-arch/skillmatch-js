@@ -4,3 +4,43 @@ const candidato = {
   habilidades: ["Swift", "Python", "JavaScript", "GitHub", "Lógica de Programação", "Scrum", "Kanban"],
   experienciaMeses: 12
 };
+
+const vagas = [
+  { 
+    id: 1, 
+    empresa: "TOTVS", 
+    cargo: "Front-End Developer (Pleno)",
+    requisitos: ["JavaScript","React", "HTML5", "Padrões de projeto e boas práticas"],
+    salario:
+    beneficio:
+    modalidade:
+  },
+
+  { 
+    id: 2, empresa: "StoneCo",
+    cargo: "Front-End Developer (com foco em Svelte para SDK de POS)",
+    requisitos: [...],
+
+  },
+
+  { 
+    id: 3, empresa: "VTEX",
+    cargo: "Front-End Developer Pleno/Sênior com ReactJS e ECMAScript",
+    requisitos: [...],
+
+  },
+
+   { 
+    id: 4, empresa: "XP Inc.",
+    cargo: "Front-end Engineer",
+    requisitos: [...],
+
+  },
+
+   { 
+    id: 5, empresa: "Oracle",
+    cargo: "Frontend Developer- React.js",
+    requisitos: [...],
+
+  },
+];
