@@ -9,44 +9,44 @@ const candidato = {
 
 //Array de objetos com as informações das 5 vagas
 const vagas = [
-  { 
-    id: 1, 
-    empresa: "TOTVS", 
+  {
+    id: 1,
+    empresa: "TOTVS",
     cargo: "Front-End Developer (Pleno)",
-    requisitos: ["JavaScript","React.js", "HTML5", "Padrões de projeto e boas práticas"],
-    salario:4700,
-    beneficio:"Vale Alimentacao",
-    modalidade:"Hibrido"
+    requisitos: ["JavaScript", "React.js", "HTML5", "Padrões de projeto e boas práticas"],
+    salario: 4700,
+    beneficio: "Vale Alimentacao",
+    modalidade: "Hibrido"
   },
 
-  { 
+  {
     id: 2, empresa: "StoneCo",
     cargo: "Front-End Developer (com foco em Svelte para SDK de POS)",
     requisitos: ["Svelte", "TypeScript", "API REST", "Git"],
     salario: 4500,
-    beneficio: ["Plano de saude","Vale alimentacao"],
+    beneficio: ["Plano de saude", "Vale alimentacao"],
     modalidade: "Presencial"
   },
 
-  { 
+  {
     id: 3, empresa: "VTEX",
     cargo: "Front-End Developer Pleno/Sênior com React.js e ECMAScript",
     requisitos: ["React.js", "ECMAScript", "Redux", "GitHub"],
     salario: 5000,
-    beneficio:"Plano de saude",
+    beneficio: "Plano de saude",
     modalidade: "Hibrido"
   },
 
-   { 
+  {
     id: 4, empresa: "XP Inc.",
     cargo: "Front-end Engineer",
     requisitos: ["JavaScript", "React.js", "HTML/CSS", "Integração com APIs"],
     salario: 5800,
-    beneficio:["Vale alimentacao","GymPass"],
+    beneficio: ["Vale alimentacao", "GymPass"],
     modalidade: "Remoto"
   },
 
-   { 
+  {
     id: 5, empresa: "Oracle",
     cargo: "Frontend Developer- React.js",
     requisitos: ["React.js", "JavaScript", "TypeScript", "CSS"],
@@ -58,20 +58,20 @@ const vagas = [
 
 //Cálculo de compatibilidade do candidato com as vagas
 function calcularCompatibilidade(candidatoHabilidades, vagaRequisitos) {
-  const encontradas = candidatoHabilidades.filter( h => vagaRequisitos.includes(h)
-);
+  const encontradas = candidatoHabilidades.filter(h => vagaRequisitos.includes(h)
+  );
 
-const totalEncontradas = encontradas.length;
+  const totalEncontradas = encontradas.length;
 
- const totalRequisitos = vagaRequisitos.length;
+  const totalRequisitos = vagaRequisitos.length;
 
- const percentual = (totalEncontradas / totalRequisitos) * 100;
+  const percentual = (totalEncontradas / totalRequisitos) * 100;
 
-  const faltantes = vagaRequisitos.filter(r => 
+  const faltantes = vagaRequisitos.filter(r =>
     !candidatoHabilidades.includes(r)
   );
 
-   return {
+  return {
     percentual: Math.round(percentual),
     encontradas: encontradas,
     faltantes: faltantes
@@ -81,7 +81,7 @@ const totalEncontradas = encontradas.length;
 function classifcarCompatibilidade(percentual) {
   if (percentual >= 80) {
     return "Alta Compatibilidade;"
-}
+  }
   else if (percentual >= 50) {
     return "Média Compatibilidade";
   }
@@ -94,12 +94,12 @@ function listarHabilidadesFaltantes(candidatoHabilidades, vagaRequisitos) {
   const faltantes = vagasrequisitos.filter(r =>
     !candidatoHabilidades.includes(r)
   );
-  return faltantes; 
+  return faltantes;
 }
 
 function encontrarMelhorVaga(candidato, vagas) {
 
-  const analises = vagas.map(vaga => 
+  const analises = vagas.map(vaga =>
     calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
   );
 
@@ -112,20 +112,35 @@ function encontrarMelhorVaga(candidato, vagas) {
 
 function gerarRecomendacaoEstudo(candidato, vagas) {
 
-  const todasAsAnalises = vagas.map(vaga => 
-  calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
-);
+  const todasAsAnalises = vagas.map(vaga =>
+    calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
+  );
 
-const recomendacoes = [];
+  const recomendacoes = [];
 
-todasAsAnalises.forEach(analise => {
-  analise.faltantes.forEach(faltante => {
-    if (!recomendacoes.includes(faltante)) {
-      recomendacoes.push(faltante);
-    }
+  todasAsAnalises.forEach(analise => {
+    analise.faltantes.forEach(faltante => {
+      if (!recomendacoes.includes(faltante)) {
+        recomendacoes.push(faltante);
+      }
+    });
   });
-});
 
-return recomendacoes;
+  return recomendacoes;
 
+}
+
+class Vaga {
+  constructor(empresa, cargo, requisitos, salario, beneficio, modalidade) {
+    this.empresa = empresa;
+    this.cargo = cargo;
+    this.requisitos = requisitos;
+    this.salario = salario;
+    this.beneficio = beneficio;
+    this.modalidade = modalidade;
+  }
+
+  exibirResumo() {
+    return `${this.cargo} na empresa ${this.empresa}`;
+  }
 }
