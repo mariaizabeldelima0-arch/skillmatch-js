@@ -94,7 +94,7 @@ function listarHabilidadesFaltantes(candidatoHabilidades, vagaRequisitos) {
   const faltantes = vagasrequisitos.filter(r =>
     !candidatoHabilidades.includes(r)
   );
-  return faltantes;
+  return faltantes; 
 }
 
 function encontrarMelhorVaga(candidato, vagas) {
@@ -108,4 +108,24 @@ function encontrarMelhorVaga(candidato, vagas) {
   );
 
   return melhorAnalise;
+}
+
+function gerarRecomendacaoEstudo(candidato, vagas) {
+
+  const todasAsAnalises = vagas.map(vaga => 
+  calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
+);
+
+const recomendacoes = [];
+
+todasAsAnalises.forEach(analise => {
+  analise.faltantes.forEach(faltante => {
+    if (!recomendacoes.includes(faltante)) {
+      recomendacoes.push(faltante);
+    }
+  });
+});
+
+return recomendacoes;
+
 }
