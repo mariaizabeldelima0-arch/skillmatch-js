@@ -175,3 +175,24 @@ function criarContadorDeAnalises() {
 }
 
 const contador = criarContadorDeAnalises();
+
+
+function buscarVagasSimuladas() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(vagas);
+    }, 2000);
+  });
+}
+
+async function iniciarSistema() {
+  console.log("Carregando vagas...");
+  
+  try {
+    const vagasCarregadas = await buscarVagasSimuladas();
+    console.log("✅ Vagas carregadas com sucesso!");
+    console.log(vagasCarregadas.length + " vagas disponíveis");
+  } catch (erro) {
+    console.log("❌ Erro ao carregar vagas:", erro);
+  }
+}
