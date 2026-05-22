@@ -155,3 +155,12 @@ class VagaFrontEnd extends Vaga {
     return `Nível da vaga: ${this.nivel}`;
   }
 }
+
+function finalizarAnalise(nomeCandidato, callback) {
+  console.log("=== ANÁLISE FINALIZADA ===");
+  callback(nomeCandidato);
+}
+
+function exibirMensagemFinal(nome) {
+  console.log(`${nome}, estude as habilidades faltantes e atualize seu plano de estudos!`);
+}
