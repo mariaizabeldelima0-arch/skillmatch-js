@@ -78,9 +78,9 @@ function calcularCompatibilidade(candidatoHabilidades, vagaRequisitos) {
   };
 }
 
-function classifcarCompatibilidade(percentual) {
+function classificarCompatibilidade(percentual) {
   if (percentual >= 80) {
-    return "Alta Compatibilidade;"
+    return "Alta Compatibilidade";
   }
   else if (percentual >= 50) {
     return "Média Compatibilidade";
@@ -91,7 +91,7 @@ function classifcarCompatibilidade(percentual) {
 }
 
 function listarHabilidadesFaltantes(candidatoHabilidades, vagaRequisitos) {
-  const faltantes = vagasrequisitos.filter(r =>
+  const faltantes = vagaRequisitos.filter(r =>
     !candidatoHabilidades.includes(r)
   );
   return faltantes;
@@ -142,5 +142,16 @@ class Vaga {
 
   exibirResumo() {
     return `${this.cargo} na empresa ${this.empresa}`;
+  }
+}
+
+class VagaFrontEnd extends Vaga {
+  constructor(empresa, cargo, requisitos, salario, beneficio, modalidade, nivel) {
+    super(empresa, cargo, requisitos, salario, beneficio, modalidade);
+    this.nivel = nivel;
+  }
+
+  exibirNivel() {
+    return `Nível da vaga: ${this.nivel}`;
   }
 }
