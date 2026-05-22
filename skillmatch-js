@@ -164,3 +164,14 @@ function finalizarAnalise(nomeCandidato, callback) {
 function exibirMensagemFinal(nome) {
   console.log(`${nome}, estude as habilidades faltantes e atualize seu plano de estudos!`);
 }
+
+function criarContadorDeAnalises() {
+  let total = 0;
+
+  return function() {
+    total++;
+    return total;
+  };
+}
+
+const contador = criarContadorDeAnalises();
