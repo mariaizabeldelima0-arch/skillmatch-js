@@ -121,11 +121,17 @@ skillmatch-js/
 - GitLens - mostra o histórico dos commits
 
 ## Branches do projeto
-
 - main - versão final pronta
 - develop - onde testo as coisas
 - feat/analise-vagas - as funções principais
 - docs/readme - esse arquivo
+
+## Link do Kanban no Trello
+https://trello.com/invite/b/6a0b45c6e0f15f788acaef49/ATTI510fedb69fe90d07893f6dd2eb467cc191D2156C/skillmatch-js-kanban
+
+## Link do vídeo explicando o projeto no Drive
+https://drive.google.com/drive/folders/1vd0_IuqK0--2QFz9LWguwqpY8XzxuSxS?usp=sharing
+
 
 ## Autora do projeto
 
