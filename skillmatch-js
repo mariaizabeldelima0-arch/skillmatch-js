@@ -1,198 +1,194 @@
-
-//Objeto com as informações do candidato
-const candidato = {
-  nome: "Alan",
-  area: "Front-End",
-  habilidades: ["Swift", "React.js", "Python", "JavaScript", "TypeScript", "GitHub", "Lógica de Programação", "Scrum", "Kanban", "CSS"],
-  experienciaMeses: 12
+// RF01 – CRIAR O PERFIL DO CANDIDATO
+// Conceitos usados: const; OBJETO; TIPOS DE DADOS (string, número, array)
+const candidato = { // const - variável constante | OBJETO
+  nome: "Alan", // STRING - texto
+  area: "Front-End", // STRING
+  habilidades: [ // ARRAY - lista de strings
+    "Swift", "React.js", "Python", "JavaScript", "TypeScript", 
+    "GitHub", "Lógica de Programação", "Scrum", "Kanban", "CSS"
+  ],
+  experienciaMeses: 12 // NÚMERO - valor inteiro
 };
 
-//Array de objetos com as informações das 5 vagas
-const vagas = [
+// RF02 – CRIAR UMA LISTA DE VAGAS
+// Conceitos usados: const; ARRAY; OBJETOS; TIPOS DE DADOS
+const vagas = [ // ARRAY com 5 objetos
   {
-    id: 1,
-    empresa: "TOTVS",
+    id: 1, // NÚMERO
+    empresa: "TOTVS", // STRING
     cargo: "Front-End Developer (Pleno)",
     requisitos: ["JavaScript", "React.js", "HTML5", "Padrões de projeto e boas práticas"],
     salario: 4700,
     beneficio: "Vale Alimentacao",
     modalidade: "Hibrido"
   },
-
   {
-    id: 2, empresa: "StoneCo",
+    id: 2,
+    empresa: "StoneCo",
     cargo: "Front-End Developer (com foco em Svelte para SDK de POS)",
     requisitos: ["Svelte", "TypeScript", "API REST", "Git"],
     salario: 4500,
-    beneficio: ["Plano de saude", "Vale alimentacao"],
+    beneficio: "Plano de saude",
     modalidade: "Presencial"
   },
-
   {
-    id: 3, empresa: "VTEX",
+    id: 3,
+    empresa: "VTEX",
     cargo: "Front-End Developer Pleno/Sênior com React.js e ECMAScript",
     requisitos: ["React.js", "ECMAScript", "Redux", "GitHub"],
     salario: 5000,
     beneficio: "Plano de saude",
     modalidade: "Hibrido"
   },
-
   {
-    id: 4, empresa: "XP Inc.",
+    id: 4,
+    empresa: "XP Inc.",
     cargo: "Front-end Engineer",
     requisitos: ["JavaScript", "React.js", "HTML/CSS", "Integração com APIs"],
     salario: 5800,
-    beneficio: ["Vale alimentacao", "GymPass"],
+    beneficio: "GymPass",
     modalidade: "Remoto"
   },
-
   {
-    id: 5, empresa: "Oracle",
+    id: 5,
+    empresa: "Oracle",
     cargo: "Frontend Developer- React.js",
     requisitos: ["React.js", "JavaScript", "TypeScript", "CSS"],
     salario: 4300,
     beneficio: "Vale alimentacao",
     modalidade: "Presencial"
-  },
+  }
 ];
 
-//Cálculo de compatibilidade do candidato com as vagas
-function calcularCompatibilidade(candidatoHabilidades, vagaRequisitos) {
-  const encontradas = candidatoHabilidades.filter(h => vagaRequisitos.includes(h)
-  );
-
-  const totalEncontradas = encontradas.length;
-
+// RF03 – CALCULAR COMPATIBILIDADE
+// Conceitos usados: FUNÇÃO; PARÂMETROS; FILTER; ARROW FUNCTIONS; INCLUDES; OPERADORES MATEMÁTICOS; OPERADOR LÓGICO (!)
+function calcularCompatibilidade(candidatoHabilidades, vagaRequisitos) { // FUNÇÃO com 2 PARÂMETROS
+  const encontradas = candidatoHabilidades.filter(h => vagaRequisitos.includes(h)); // FILTER | ARROW FUNCTION (=>) | INCLUDES
+  const totalEncontradas = encontradas.length; // PROPRIEDADE length
   const totalRequisitos = vagaRequisitos.length;
-
-  const percentual = (totalEncontradas / totalRequisitos) * 100;
-
-  const faltantes = vagaRequisitos.filter(r =>
-    !candidatoHabilidades.includes(r)
-  );
-
-  return {
-    percentual: Math.round(percentual),
+  const percentual = (totalEncontradas / totalRequisitos) * 100; // OPERADOR MATEMÁTICO (/, *)
+  const faltantes = vagaRequisitos.filter(r => !candidatoHabilidades.includes(r)); // OPERADOR LÓGICO (!)
+  return { // RETURN | OBJETO
+    percentual: Math.round(percentual), // Math.round
     encontradas: encontradas,
     faltantes: faltantes
   };
 }
 
+// RF04 – CLASSIFICAR COMPATIBILIDADE
+// Conceitos usados: IF/ELSE; OPERADOR DE COMPARAÇÃO (>=)
 function classificarCompatibilidade(percentual) {
-  if (percentual >= 80) {
+  if (percentual >= 80) { // IF | OPERADOR DE COMPARAÇÃO (>=)
     return "Alta Compatibilidade";
-  }
-  else if (percentual >= 50) {
+  } else if (percentual >= 50) { // ELSE IF
     return "Média Compatibilidade";
-  }
-  else {
+  } else { // ELSE
     return "Baixa Compatibilidade";
   }
 }
 
+// RF05 – LISTAR HABILIDADES FALTANTES
+// Conceitos usados: FILTER; OPERADOR LÓGICO (!); INCLUDES
 function listarHabilidadesFaltantes(candidatoHabilidades, vagaRequisitos) {
-  const faltantes = vagaRequisitos.filter(r =>
-    !candidatoHabilidades.includes(r)
-  );
+  const faltantes = vagaRequisitos.filter(r => !candidatoHabilidades.includes(r));
   return faltantes;
 }
 
+// RF06 – ENCONTRAR A VAGA COM MAIOR COMPATIBILIDADE
+// Conceitos usados: MAP; REDUCE; OPERADOR TERNÁRIO (?:); OPERADOR DE COMPARAÇÃO (>)
 function encontrarMelhorVaga(candidato, vagas) {
-
-  const analises = vagas.map(vaga =>
-    calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
+  const analises = vagas.map(vaga => calcularCompatibilidade(candidato.habilidades, vaga.requisitos)); // MAP | FUNCTION CALL
+  const melhorAnalise = analises.reduce((melhor, atual) => // REDUCE
+    atual.percentual > melhor.percentual ? atual : melhor // OPERADOR TERNÁRIO (?:) | OPERADOR (>)
   );
-
-  const melhorAnalise = analises.reduce((melhor, atual) =>
-    atual.percentual > melhor.percentual ? atual : melhor
-  );
-
   return melhorAnalise;
 }
 
+// RF07 – GERAR RECOMENDAÇÃO DE ESTUDO
+// Conceitos usados: MAP; FOREACH; IF; PUSH
 function gerarRecomendacaoEstudo(candidato, vagas) {
-
-  const todasAsAnalises = vagas.map(vaga =>
-    calcularCompatibilidade(candidato.habilidades, vaga.requisitos)
-  );
-
-  const recomendacoes = [];
-
-  todasAsAnalises.forEach(analise => {
+  const todasAsAnalises = vagas.map(vaga => calcularCompatibilidade(candidato.habilidades, vaga.requisitos));
+  const recomendacoes = []; // ARRAY VAZIO
+  todasAsAnalises.forEach(analise => { // FOREACH
     analise.faltantes.forEach(faltante => {
-      if (!recomendacoes.includes(faltante)) {
-        recomendacoes.push(faltante);
+      if (!recomendacoes.includes(faltante)) { // IF
+        recomendacoes.push(faltante); // PUSH
       }
     });
   });
-
   return recomendacoes;
-
 }
 
-class Vaga {
-  constructor(empresa, cargo, requisitos, salario, beneficio, modalidade) {
-    this.empresa = empresa;
+// RF09 – CRIAR UMA CLASSE
+// Conceitos usados: CLASS; CONSTRUCTOR; THIS; MÉTODO
+class Vaga { // CLASS - molde para criar objetos
+  constructor(empresa, cargo, requisitos, salario, beneficio, modalidade) { // CONSTRUCTOR
+    this.empresa = empresa; // THIS - propriedade
     this.cargo = cargo;
     this.requisitos = requisitos;
     this.salario = salario;
     this.beneficio = beneficio;
     this.modalidade = modalidade;
   }
-
-  exibirResumo() {
-    return `${this.cargo} na empresa ${this.empresa}`;
+  exibirResumo() { // MÉTODO
+    return `${this.cargo} na empresa ${this.empresa}`; // TEMPLATE LITERAL
   }
 }
 
-class VagaFrontEnd extends Vaga {
+// RF10 – USAR HERANÇA
+// RF11 – DEMONSTRAR USO DO THIS (usado em RF09)
+// Conceitos usados: EXTENDS; HERANÇA; SUPER
+class VagaFrontEnd extends Vaga { // EXTENDS - HERANÇA
   constructor(empresa, cargo, requisitos, salario, beneficio, modalidade, nivel) {
-    super(empresa, cargo, requisitos, salario, beneficio, modalidade);
+    super(empresa, cargo, requisitos, salario, beneficio, modalidade); // SUPER - chama classe pai
     this.nivel = nivel;
   }
-
   exibirNivel() {
     return `Nível da vaga: ${this.nivel}`;
   }
 }
 
-function finalizarAnalise(nomeCandidato, callback) {
-  console.log("=== ANÁLISE FINALIZADA ===");
-  callback(nomeCandidato);
+// RF12 – USAR CALLBACK
+// Conceitos usados: CALLBACK; PARÂMETRO FUNÇÃO
+function finalizarAnalise(nomeCandidato, callback) { // callback - FUNÇÃO como parâmetro
+  console.log("=== ANÁLISE FINALIZADA ==="); // CONSOLE.LOG
+  callback(nomeCandidato); // CALLBACK - EXECUTA função recebida
 }
 
 function exibirMensagemFinal(nome) {
   console.log(`${nome}, estude as habilidades faltantes e atualize seu plano de estudos!`);
 }
 
+// RF13 – USAR CLOSURE
+// Conceitos usados: CLOSURE; LET; ESCOPO; INCREMENTO (++)
 function criarContadorDeAnalises() {
-  let total = 0;
-
-  return function() {
-    total++;
+  let total = 0; // LET - variável privada (ESCOPO)
+  return function () { // RETURN | CLOSURE - função que lembra de total
+    total++; // INCREMENTO (++)
     return total;
   };
 }
 
 const contador = criarContadorDeAnalises();
 
-
+// RF14 – USAR PROMISE E ASYNC/AWAIT
+// Conceitos usados: PROMISE; RESOLVE; SETTIMEOUT
 function buscarVagasSimuladas() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
+  return new Promise((resolve) => { // PROMISE | RESOLVE | CALLBACK
+    setTimeout(() => { // SETTIMEOUT - espera 2 segundos
       resolve(vagas);
     }, 2000);
   });
 }
 
-async function iniciarSistema() {
+// Conceitos usados: ASYNC; AWAIT; TRY/CATCH
+async function iniciarSistema() { // ASYNC - trabalha com Promises
   console.log("Carregando vagas...");
-  
-  try {
-    const vagasCarregadas = await buscarVagasSimuladas();
+  try { // TRY - tenta executar
+    const vagasCarregadas = await buscarVagasSimuladas(); // AWAIT - espera Promise
     console.log("✅ Vagas carregadas com sucesso!");
-    console.log(vagasCarregadas.length + " vagas disponíveis");
-  } catch (erro) {
+    console.log(vagasCarregadas.length + " vagas disponíveis"); // OPERADOR (+)
+  } catch (erro) { // CATCH - trata erro
     console.log("❌ Erro ao carregar vagas:", erro);
   }
 }
